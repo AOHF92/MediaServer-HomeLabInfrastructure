@@ -15,6 +15,6 @@ docker compose up -d
 
 | Service  | Port  | Description                                   |
 | -------- | ----- | --------------------------------------------- |
-| Jellyfin | 8096  | Main Jellyfin UI                              |
-| Komga    | 25600 | Komga Web UI                                  |
-| Caddy    | 3001  | Internal proxy endpoint for Cloudflare Tunnel |
+| Jellyfin | ####  | Main Jellyfin UI                              |
+| Komga    | #### | Komga Web UI                                  |
+| Caddy    | ####  | Internal proxy endpoint for Cloudflare Tunnel |
