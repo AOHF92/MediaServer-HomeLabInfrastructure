@@ -1,0 +1,51 @@
+# --- OS Files ---
+Thumbs.db
+.DS_Store
+
+# --- Python & Node junk (just in case) ---
+__pycache__/
+node_modules/
+
+# --- Editor files ---
+*.swp
+*.swo
+*.tmp
+*.bak
+*.log
+*.orig
+*.cache
+
+# --- VS Code ---
+.vscode/
+.history/
+
+# --- Docker secrets ---
+docker/*.env
+*.env
+.env*
+
+# --- Cloudflare credentials (very important) ---
+*.json
+*.pem
+*.crt
+*.key
+cloudflare/*-credentials.*
+
+# --- Caddy runtime files ---
+caddy/data/
+caddy/config/
+
+# --- Application configs you should not commit ---
+**/config.yaml
+**/config.yml
+**/config.json
+**/secrets.*
+
+# --- Archives ---
+*.tar
+*.zip
+*.7z
+*.gz
+
+# --- System-level backups ---
+backup/
