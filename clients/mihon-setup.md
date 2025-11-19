@@ -13,7 +13,7 @@ Mihon connects to Komga using an **API key**.
 4. Install Komga extension
    - Go to Browse → Extensions → install Komga.
 5. Configure server:
-- URL: https://api.domain.cc
+- URL: ```https://api.example-media.net```
 - API Key: [placeholder]
 
 ```nginx
