@@ -1,0 +1,98 @@
+{
+  auto_https off
+  debug
+}
+
+:3001 {
+    log
+    encode zstd gzip
+
+    # ---------- Matchers ----------
+
+    # Komga (Tachimanga etc.) – API paths
+    @komga_api {
+        host api.domain.cc
+        path /api/* /opds/* /sse/*
+    }
+
+    # Aniyomi (Android) -> Jellyfin
+    @aniyomi {
+        host api.domain.cc
+        header_regexp ua User-Agent (?i)\bAniyomi\b
+    }
+
+    # Jellyfin iOS – friend’s phone via WARP
+    @jf_ios_root {
+        host api.domain.cc
+        path /
+        header Cf-Warp-Tag-Id <placeholder>
+    }
+
+    @jf_ios_web {
+        host api.domain.cc
+        path /web*
+        header Cf-Warp-Tag-Id <placeholder>
+    }
+
+    @jf_ios_other {
+        host api.domain.cc
+        header Cf-Warp-Tag-Id <placeholder>
+        not { 
+		path /api/* /opds/* /sse/* 
+		}
+    }
+
+    # Fallback for non-HTML API-ish calls to Jellyfin
+    @api_nonhtml {
+        host api.domain.cc
+        not { 
+		path /api/* /opds/* /sse/* 
+		}
+        not { 
+		header Accept *text/html* 
+		}
+    }
+
+    # UA-based deniers (same as you had)
+    @browserUA header_regexp ua User-Agent (?i)(chrome|safari|edge|firefox|opera|brave|vivaldi)
+    @aiUA header_regexp ua User-Agent (?i)(GPTBot|ChatGPT|CCBot|Claude|Anthropic|Perplexity|Google-Extended|Bytespider|facebookexternalhit|Diffbot|DataForSeoBot|ai2bot|omgili|omgilibot|cohere|mj12bot|seminarbots?)
+    @noUA header User-Agent ""
+
+    # ---------- Routing ----------
+
+    route {
+        # 1) Komga first (Tachimanga)
+        handle @komga_api {
+            reverse_proxy http://host.docker.internal:25600
+        }
+
+        # 2) Jellyfin iOS (friend device only)
+        handle @jf_ios_root {
+            reverse_proxy http://host.docker.internal:8096
+        }
+        handle @jf_ios_web {
+            reverse_proxy http://host.docker.internal:8096
+        }
+        handle @jf_ios_other {
+            reverse_proxy http://host.docker.internal:8096
+        }
+
+        # 3) Aniyomi (Android) -> Jellyfin
+        handle @aniyomi {
+            reverse_proxy http://host.docker.internal:8096
+        }
+
+        # 4) Other non-HTML API-ish calls -> Jellyfin
+        handle @api_nonhtml {
+            reverse_proxy http://host.docker.internal:8096
+        }
+
+        # 5) Hard deniers
+        respond @browserUA 403
+        respond @aiUA 403
+        respond @noUA 403
+
+        # 6) Anything else -> 403
+        respond 403
+    }
+}
