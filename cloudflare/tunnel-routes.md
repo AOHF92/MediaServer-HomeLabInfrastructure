@@ -4,8 +4,8 @@
 
 | Public Hostname | Path | Internal Service |
 |-----------------|------|------------------|
-| `areito.domain.cc` | * | `http://host.docker.internal:8096` |
-| `batey.domain.cc` | * | `http://host.docker.internal:25600` |
+| `jellyfin.domain.cc` | * | `http://host.docker.internal:8096` |
+| `komga.domain.cc` | * | `http://host.docker.internal:25600` |
 | `api.domain.cc` | * | `http://host.docker.internal:3001` |
 
 A global 404 rule handles all unmatched traffic.
