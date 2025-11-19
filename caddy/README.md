@@ -16,5 +16,5 @@ Caddy replaces Cloudflare’s deprecated *Request Header Transform Rules*.
 ### ✔️ Inject Komga API key (Mihon only)  
 ### ✔️ Proxy requests to Komga & Jellyfin  
 ### ✔️ Provide a single unified endpoint:  
-``` https://api.yucaroll.cc ```
+``` https://api.domain.cc ```
 ### ✔️ Prevent unauthorized traffic  
