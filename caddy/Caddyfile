@@ -11,32 +11,34 @@
 
     # Komga (Tachimanga etc.) – API paths
     @komga_api {
-        host api.domain.cc
+        host api.yucaroll.cc
         path /api/* /opds/* /sse/*
     }
 
     # Aniyomi (Android) -> Jellyfin
     @aniyomi {
-        host api.domain.cc
+        host api.yucaroll.cc
         header_regexp ua User-Agent (?i)\bAniyomi\b
     }
 
     # Jellyfin iOS – friend’s phone via WARP
+    #   TODO: put your friend’s real WARP tag here (from your logs),
+    #   e.g. dcb89a8f-6259-482a-b433-0f3c6a1bc39e
     @jf_ios_root {
-        host api.domain.cc
+        host api.yucaroll.cc
         path /
-        header Cf-Warp-Tag-Id <placeholder>
+        header Cf-Warp-Tag-Id .+
     }
 
     @jf_ios_web {
-        host api.domain.cc
+        host api.yucaroll.cc
         path /web*
-        header Cf-Warp-Tag-Id <placeholder>
+        header Cf-Warp-Tag-Id .+
     }
 
     @jf_ios_other {
-        host api.domain.cc
-        header Cf-Warp-Tag-Id <placeholder>
+        host api.yucaroll.cc
+        header Cf-Warp-Tag-Id .+
         not { 
 		path /api/* /opds/* /sse/* 
 		}
@@ -44,7 +46,7 @@
 
     # Fallback for non-HTML API-ish calls to Jellyfin
     @api_nonhtml {
-        host api.domain.cc
+        host api.yucaroll.cc
         not { 
 		path /api/* /opds/* /sse/* 
 		}
@@ -96,3 +98,6 @@
         respond 403
     }
 }
+
+
+
