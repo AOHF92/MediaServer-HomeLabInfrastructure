@@ -3,7 +3,7 @@
   debug
 }
 
-:3001 {
+:#### {
     log
     encode zstd gzip
 
@@ -11,32 +11,32 @@
 
     # Komga (Tachimanga etc.) – API paths
     @komga_api {
-        host api.domain.cc
+        host api.example-media.net
         path /api/* /opds/* /sse/*
     }
 
     # Aniyomi (Android) -> Jellyfin
     @aniyomi {
-        host api.domain.cc
+        host api.example-media.net
         header_regexp ua User-Agent (?i)\bAniyomi\b
     }
 
     # Jellyfin iOS 
 
     @jf_ios_root {
-        host api.domain.cc
+        host api.example-media.net
         path /
         header Cf-Warp-Tag-Id .+
     }
 
     @jf_ios_web {
-        host api.domain.cc
+        host api.example-media.net
         path /web*
         header Cf-Warp-Tag-Id .+
     }
 
     @jf_ios_other {
-        host api.domain.cc
+        host api.example-media.net
         header Cf-Warp-Tag-Id .+
         not { 
 		path /api/* /opds/* /sse/* 
@@ -45,7 +45,7 @@
 
     # Fallback for non-HTML API-ish calls to Jellyfin
     @api_nonhtml {
-        host api.domain.cc
+        host api.example-media.net
         not { 
 		path /api/* /opds/* /sse/* 
 		}
@@ -64,28 +64,28 @@
     route {
         # 1) Komga first (Tachimanga)
         handle @komga_api {
-            reverse_proxy http://host.docker.internal:25600
+            reverse_proxy http://host.docker.internal:####
         }
 
         # 2) Jellyfin iOS (friend device only)
         handle @jf_ios_root {
-            reverse_proxy http://host.docker.internal:8096
+            reverse_proxy http://host.docker.internal:####
         }
         handle @jf_ios_web {
-            reverse_proxy http://host.docker.internal:8096
+            reverse_proxy http://host.docker.internal:####
         }
         handle @jf_ios_other {
-            reverse_proxy http://host.docker.internal:8096
+            reverse_proxy http://host.docker.internal:####
         }
 
         # 3) Aniyomi (Android) -> Jellyfin
         handle @aniyomi {
-            reverse_proxy http://host.docker.internal:8096
+            reverse_proxy http://host.docker.internal:####
         }
 
         # 4) Other non-HTML API-ish calls -> Jellyfin
         handle @api_nonhtml {
-            reverse_proxy http://host.docker.internal:8096
+            reverse_proxy http://host.docker.internal:####
         }
 
         # 5) Hard deniers
