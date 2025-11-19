@@ -1,7 +1,7 @@
 # 🌐 Media Server — Home Lab Infrastructure
 
 <p align="center">
-  <img src="architecture/media-architecture.png" width="650">
+  <img src="architecture/MyArchitecture.png" width="650">
 </p>
 
 A fully self-hosted media ecosystem built on top of:
