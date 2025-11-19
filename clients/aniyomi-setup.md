@@ -12,5 +12,5 @@ Aniyomi connects to Jellyfin using **username/password**.
 3. Install Jellyfin extension:
    - Browse → Extensions → Jellyfin.
 4. Configure Server:
-   - Server URL: https://api.domain.cc
+   - Server URL: https://api.example-media.net
    - User's Jellyfin Credentials
