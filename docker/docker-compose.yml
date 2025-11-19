@@ -10,13 +10,13 @@ services:
       - "E:/Media:/media:ro"
       - "G:\\Backups\\Jellyfin:/config"
     ports:
-      - "8096:8096"
+      - "####:####"
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
     # Optional: health check so Docker knows if Jellyfin is ready
     healthcheck:
-      test: ["CMD-SHELL", "curl -fs http://localhost:8096/health || exit 1"]
+      test: ["CMD-SHELL", "curl -fs http://localhost:####/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -27,12 +27,12 @@ services:
     image: gotson/komga:latest
     container_name: komga
     ports:
-      - "25600:25600"
+      - "####:####"
     volumes:
       - "E:\\Media\\Manga:/books:rw"
       - "G:\\Backups\\Komga:/config"
     environment:
-      - SERVER_PORT=25600
+      - SERVER_PORT=#####
     restart: unless-stopped
 
   cloudflared:
@@ -48,7 +48,7 @@ services:
     container_name: mihon-gw
     restart: unless-stopped
     ports:
-      - "3001:3001"               # Cloudflared tunnel will point here
+      - "####:####"               # Cloudflared tunnel will point here
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
