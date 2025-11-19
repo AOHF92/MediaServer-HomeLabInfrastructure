@@ -29,8 +29,8 @@ You use two generic policy models:
 
 | Application | Domain | Notes |
 |-------------|---------|--------|
-| Jellyfin | `areito.domain.cc` | Protected by Zero Trust |
-| Komga | `batey.domain.cc` | Protected by Zero Trust |
+| Jellyfin | `jellyfin.domain.cc` | Protected by Zero Trust |
+| Komga | `komga.domain.cc` | Protected by Zero Trust |
 | API Gateway | `api.domain.cc` | Protected by Zero Trust |
 
 Every domain requires authentication before reaching the internal services.
