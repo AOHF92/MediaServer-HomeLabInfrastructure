@@ -37,9 +37,6 @@ This setup prioritizes **maximum privacy**:
 - All users must authenticate with **One-Time PIN (OTP) via email**  
 - Only approved email addresses can authenticate  
 - API-key logic is handled by **Caddy only**  
-- No Cloudflare header transforms (deprecated)  
-- No service tokens used  
-- No shared credentials stored in the repo  
 
 ---
 
