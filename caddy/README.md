@@ -2,7 +2,7 @@
 
 Caddy acts as:
 
-- TLS terminator (Cloudflare handles external TLS)
+- TLS terminator 
 - Internal reverse proxy for Komga & Jellyfin
 - API-key injection layer for Mihon
 - Routing controller for `/api/*`
